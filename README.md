@@ -20,7 +20,7 @@ For an in-depth description of formulas and methods used, visit the [Confluence 
 
 ### 3. Utility Configuration Options
 - `--print_config`: when set to True, print a timestamped text file with all of the configuration parameters in the same path as the plot outputs.
-- `--background`: when set to True, use the background reflectances in the SNR calculation. If you wish to use these reflectances, the Reflectance Images must be downloaded from                     [Google Drive]() and saved to a `./reflectance_landsat` folder
+- `--background`: when set to True, use the background reflectances in the SNR calculation. If you wish to use these reflectances, the Reflectance Images must be downloaded from                     [Google Drive](https://drive.google.com/drive/u/0/folders/1WE8v5VO-7y6lULS4zqLUGbEFLYNGTPgu) and saved to a `./reflectance_landsat` folder
 - `--headless`: when set to False, will show the MODTRAN window and how chromedriver is actually controlling the inputs. Helpful for debugging.
 - `--chromedriver`: links to the filepath of the Chromedriver.exe, change it to fit your computer.
 - `--orbit_params_path`: links to the `modtran_inputs.csv` file. Must be manually set if using `snr_plots.py`. 
