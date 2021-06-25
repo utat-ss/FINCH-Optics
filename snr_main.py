@@ -13,13 +13,14 @@ if __name__ == "__main__":
     Assumptions:
         - Optical transmittance is constant over the spectral range.
         - Quantum efficiency linearly decays over the spectral range.
+        - Frame Period is equal to Integration Time.
     '''
     main = True
     spectral_series, snr, cfg = signal_to_noise()
 
     plt.figure()
     plt.plot(spectral_series[:-1], snr)
-    plt.xlabel('Spectral Resolution (nm)')
+    plt.xlabel('Spectral Resolution (um)')
     plt.ylabel('Signal to Noise Ratio')
     plt.title('Signal to Noise Ratio over the Spectral Range ')
     save_path = os.path.join(cfg.outputs_path, "snr_plot")

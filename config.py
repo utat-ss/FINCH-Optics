@@ -7,10 +7,7 @@ def parse_config():
     parser = argparse.ArgumentParser()
 
     '''
-    Use this file to adjust the parameters for the signal to noise ratio analysis. If using snr_main, --transmittance,
-    --season, and --spectral_res can be set to any value you like. If using snr_plots, set up a list of values for 
-    transmittance, season, and spectral_res in snr_plots.py, and set the corresponding defaults in config.py to a 
-    variable (transmittance, season, and spectral_res, respectively) 
+    Use this file to adjust the parameters for the signal to noise ratio analysis. 
     '''
     # Print Configuration
     parser.add_argument("--print_config", type=bool, default=True, help='set to True if you wish to print all these parameters to a text file in the same path as the plot.')

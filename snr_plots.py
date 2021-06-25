@@ -7,9 +7,8 @@ from print_config import print_config
 
 if __name__ == "__main__":
      # Define which plots you would like to show and if you would like to print the config file. Only plot one parameter
-     # at a time, we want to keep this analysis as simple as possible. For example, trying to optimize 6 variables at the
-     # same time is likely unrealistic.
-     # Plots: 'season', 'spectral_res', 'optical_transmittance', 'sensor_zenith', 'sensor_altitude'
+     # at a time, we want to keep this analysis as simple as possible.
+     # Plots: 'season', 'spectral_res', 'optical_transmittance', 'sensor_zenith', 'sensor_altitude', 't_int', 'frame_rate'
 
      # --------------------------------------------------------------------------------------------------------------- #
      plot = 't_int'
