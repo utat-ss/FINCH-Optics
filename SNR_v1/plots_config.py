@@ -3,7 +3,7 @@
 
 import argparse
 
-def parse_config(season='winter', spectral_res=2, transmittance=0.70, zenith=150.73, altitude=499.71, t_int=0.1667):
+def parse_config(season='winter', spectral_res=4, transmittance=0.5144, zenith=150.73, altitude=499.71, t_int=0.1667, focal_length=200):
     parser = argparse.ArgumentParser()
 
     '''
@@ -11,23 +11,25 @@ def parse_config(season='winter', spectral_res=2, transmittance=0.70, zenith=150
     instead be defined in the snr_plots.py function so that you can iterate over arrays of values.
     '''
     # General Configuration
-    parser.add_argument("--print_config", type=bool, default=True, help='set to True if you wish to print all these parameters to a text file in the same path as the plot.')
-    parser.add_argument("--background", type=bool, default=True, help='set to True if you wish to use the background reflectance in the SNR calculation')
+    parser.add_argument("--print_config", type=bool, default=False, help='set to True if you wish to print all these parameters to a text file in the same path as the plot.')
+    parser.add_argument("--background", type=bool, default=False, help='set to True if you wish to use the background reflectance in the SNR calculation')
     parser.add_argument("--decibels", type=bool, default=False, help='set to True if you wish to present SNR in decibels')
 
     # Signal Target
-    parser.add_argument("--opt_transmittance", type=float, default=transmittance, help='Transmittance of the entire optical system from 0 to 1')
+    parser.add_argument("--opt_transmittance", type=float, default=transmittance, help='Transmittance of the fore optics, collimating and converging lens, mirror, and spectral filter')
     parser.add_argument("--x_pixels", type=float, default=640, help='Number of pixels in x-axis on the sensor')
     parser.add_argument("--y_pixels", type=float, default=512, help='Number of pixels in y-axis on the sensor')
     parser.add_argument("--pixel_pitch", type=float, default=15, help='Size of each pixel (um)')
     parser.add_argument("--t_int", type=float, default=t_int, help='Integration Time (s)')
-    parser.add_argument("--focal_length", type=float, default=200, help='focal length of the optical system (mm)')
+    parser.add_argument("--focal_length", type=float, default=focal_length, help='focal length of the optical system (mm)')
     parser.add_argument("--d_ap", type=float, default=33, help='Diameter of the aperture (mm)')
-    parser.add_argument("--epsilon", type=float, default=0.99, help='Fraction of optical aperture area obscured')
+    parser.add_argument("--epsilon", type=float, default=0.922, help='Fraction of optical aperture area obscured')
     parser.add_argument("--h", type=float, default=6.63e-34, help='Planck constant')
     parser.add_argument("--c", type=float, default=3.00e8, help='Speed of light')
     parser.add_argument("--eta_lower", type=float, default=0.75, help='quantum efficiency at the lower bound of the spectral range')
     parser.add_argument("--eta_upper", type=float, default=0.60, help='quantum efficiency at the upper bound of the spectral range')
+    parser.add_argument("--de_lower", type=float, default=0.59, help='transmittance of the diffraction grating at lower bound of the spectral range')
+    parser.add_argument("--de_upper", type=float, default=0.55, help='transmittance of the diffraction grating at upper bound of spectral range')
 
     # Noise
     parser.add_argument("--well_depth", type=int, default=19000, help='Full well depth (in e-)')
@@ -36,7 +38,7 @@ def parse_config(season='winter', spectral_res=2, transmittance=0.70, zenith=150
     parser.add_argument("--readout_noise", type=int, default=500, help='Readout noise (in e-)')
 
     # File Paths
-    parser.add_argument("--chromedriver", type=str, default='C:/Users/adynxps/Downloads/chromedriver_win32/chromedriver.exe', help='file path of chromedriver.exe')
+    parser.add_argument("--chromedriver", type=str, default='C:/Users/adynxps/Downloads/chromedriver_win32_95/chromedriver.exe', help='file path of chromedriver.exe')
     parser.add_argument("--orbit_params_path", type=str, default='./Modtran_Graphs/modtran_orbit_params.csv', help='file path of input MODTRAN CSV')
     parser.add_argument("--outputs_path", type=str, default='snr_results', help='file path of output graphs')
 

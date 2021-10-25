@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     plt.figure()
     plt.plot(spectral_series[:-1], snr)
-    plt.xlabel('Spectral Resolution (um)')
+    plt.xlabel('Spectral Range (um)')
     plt.ylabel('Signal to Noise Ratio')
     plt.title('Signal to Noise Ratio over the Spectral Range ')
     save_path = os.path.join(cfg.outputs_path, "snr_plot")

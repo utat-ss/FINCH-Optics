@@ -5,14 +5,15 @@
 import numpy as np
 import math
 import os
-from BrokeTran import BrokeTran
+import sys
+from Broketran.BrokeTran import BrokeTran
 from plots_config import parse_config
 from scipy.integrate import cumtrapz
 from scipy.interpolate import interp1d
 from background_reflectance import background_reflectance
 
-def signal_to_noise(season='winter', spectral_res=2, transmittance=0.75, zenith=150.73, altitude=499.71, t_int=0.1667):
-    cfg = parse_config(season, spectral_res, transmittance, zenith, altitude, t_int)
+def signal_to_noise(season='winter', spectral_res=4, transmittance=0.5144, zenith=150.73, altitude=499.71, t_int=0.1667, focal_length=200):
+    cfg = parse_config(season, spectral_res, transmittance, zenith, altitude, t_int, focal_length)
 
     if not os.path.exists(cfg.outputs_path):
         os.mkdir(cfg.outputs_path)
@@ -35,9 +36,10 @@ def signal_to_noise(season='winter', spectral_res=2, transmittance=0.75, zenith=
     ### Target Signal Calculation
     f_sys = (cfg.focal_length / (1e3)) / (cfg.d_ap / (1e3))
     quant_eff = np.linspace(cfg.eta_lower, cfg.eta_upper, len(spec_res_series))
+    diffraction_eff = np.linspace(cfg.de_lower, cfg.de_upper, len(spec_res_series))
     area_detector = cfg.x_pixels * (cfg.pixel_pitch / 1e6) * cfg.y_pixels * (cfg.pixel_pitch / 1e6)
     signal_const = (area_detector * math.pi * (1 - cfg.epsilon) * cfg.t_int) / (4 * (f_sys ** 2) * cfg.h * cfg.c)
-    signal_integrand = (np.multiply(np.multiply(quant_eff, L_target), np.asarray(spec_res_series)) * cfg.opt_transmittance)
+    signal_integrand = (np.multiply(np.multiply(np.multiply(quant_eff, L_target), diffraction_eff), np.asarray(spec_res_series)) * cfg.opt_transmittance)
     signal_int = cumtrapz(signal_integrand, spec_res_series)
     for i in range(len(signal_int)-1, 0, -1):
         signal_int[i] = signal_int[i] - signal_int[i-1]

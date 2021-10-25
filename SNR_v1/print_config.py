@@ -17,7 +17,10 @@ def print_config(cfg, plot="", path="", time=""):
                                  ['Decibels', cfg.decibels, '']])
 
     signal_title = "---------------- SIGNAL PARAMETERS ----------------\n"
-    signal_params = np.asarray([['Optical Transmittance', cfg.opt_transmittance, ''],
+    signal_params = np.asarray([['Fore Optics Transmittance', cfg.foreoptics_transmittance, ''],
+                ['Collimator Transmittance', cfg.collimator_transmittance, ''],
+                ['Filter Transmittance', cfg.filter_transmittance, ''],
+                ['Diverging Lens Transmittance', cfg.diverging_transmittance, ''],
                 ['X Pixels', cfg.x_pixels, ''],
                 ['Y Pixels', cfg.y_pixels, ''],
                 ['Pixel Pitch', cfg.pixel_pitch, 'um'],
@@ -27,8 +30,12 @@ def print_config(cfg, plot="", path="", time=""):
                 ['Fraction of Aperture Blocked', cfg.epsilon, ''],
                 ['Planck Constant', cfg.h, 'Js'],
                 ['Speed of Light', cfg.c, 'm/s'],
-                ['Quantum Efficiency at Lower Spectral Bound', cfg.eta_lower, ''],
-                ['Quantum Efficiency at Upper Spectral Bound', cfg.eta_upper, '']])
+                ['Sensor', cfg.sensor, ''],
+                ['Diffraction Grating', cfg.grating, '']])
+                # ['Quantum Efficiency at Lower Spectral Bound', cfg.eta_lower, ''],
+                # ['Quantum Efficiency at Upper Spectral Bound', cfg.eta_upper, ''],
+                # ['Diffraction Efficiency at Lower Spectral Bound', cfg.de_lower, ''],
+                # ['Diffraction Efficiency at Upper Spectral Bound', cfg.de_upper, '']])
 
     noise_title = "---------------- NOISE PARAMETERS ----------------\n"
     noise_params = np.asarray([['Well Depth', cfg.well_depth, 'e-/pixel'],

@@ -30,6 +30,8 @@ if __name__ == "__main__":
           plot_list = orbital_params[1:, 2].astype(float)
      elif plot == 't_int' or plot == 'frame_rate':
           plot_list = [0.01, 0.05, 0.10, 0.1667]
+     elif plot == 'focal_length':
+          plot_list = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400]
 
 
      snr_list = np.zeros((len(plot_list), 3))
@@ -50,8 +52,10 @@ if __name__ == "__main__":
                spectral_series, snr, cfg = signal_to_noise(altitude=x_val)
           elif plot == 't_int' or plot == 'frame_rate':
                spectral_series, snr, cfg = signal_to_noise(t_int=x_val)
-          print("(%d / %d) Calculating SNR -> Transmittance: %.2f, Spectral Resolution: %.1f, Season: %s, Zenith: %.3f, Altitude: %.3f, Integration Time: %.2f" % (
-               x_num + 1, len(plot_list), cfg.opt_transmittance, cfg.spectral_res, cfg.season, cfg.zenith, cfg.altitude, cfg.t_int))
+          elif plot == 'focal_length':
+               spectral_series, snr, cfg = signal_to_noise(focal_length=x_val)
+          print("(%d / %d) Calculating SNR -> Transmittance: %.2f, Spectral Resolution: %.1f, Season: %s, Zenith: %.3f, Altitude: %.3f, Integration Time: %.2f, Focal Length %d" % (
+               x_num + 1, len(plot_list), cfg.opt_transmittance, cfg.spectral_res, cfg.season, cfg.zenith, cfg.altitude, cfg.t_int, cfg.focal_length))
           for i in spectral_series:
                diff_band_1.append(abs(i - 1.610e-6))
                diff_band_2.append(abs(i - 1.650e-6))
@@ -85,6 +89,10 @@ if __name__ == "__main__":
                plt.plot(np.divide(1, np.asarray(plot_list)), snr_list[:, 0], label="1610nm")
                plt.plot(np.divide(1, np.asarray(plot_list)), snr_list[:, 1], label="1650nm")
                plt.plot(np.divide(1, np.asarray(plot_list)), snr_list[:, 2], label="1670nm")
+          elif plot == 'focal_length':
+               plt.semilogy(plot_list, snr_list[:, 0], label="1610nm")
+               plt.semilogy(plot_list, snr_list[:, 1], label="1650nm")
+               plt.semilogy(plot_list, snr_list[:, 2], label="1670nm")
           else:
                plt.plot(plot_list, snr_list[:, 0], label="1610nm")
                plt.plot(plot_list, snr_list[:, 1], label="1650nm")
@@ -109,6 +117,9 @@ if __name__ == "__main__":
           elif plot == 'Frame Rate':
                plt.xlabel('Frame Rate')
                plt.title('Signal to Noise Ratio versus Frame Rate')
+          elif plot == 'focal_length':
+               plt.xlabel('Focal Length (mm)')
+               plt.title('Signal to Noise Ratio versus Focal Length (Logarithmic)')
 
      dirname = os.path.dirname(__file__)
      outputs_path = os.path.join(dirname, cfg.outputs_path)
