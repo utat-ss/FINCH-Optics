@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "system_optimizer"
+version = "0.1.0"
+description = "High-level multi-objective optimization of FINCH payload optical parameters"
+authors = ["Jennifer Zhang, Ginny Guo, Shiqi Xu"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.7.1,<3.11"
+numpy = "^1.21.4"
+scipy = "^1.7.3"
+pandas = "^1.3.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
