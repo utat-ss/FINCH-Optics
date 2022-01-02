@@ -49,9 +49,10 @@ def parse_config():
 
     # MODTRAN
     # Visit this link if more explanation of these terms is needed: http://modtran.spectral.com/modtran_home#help
-    parser.add_argument("--spectral_res", type=float, default=1.56, help='spectral resolution (nm) between 0.5nm and 8.5nm')
-    parser.add_argument("--lambda_min", type=int, default=900, help='lower bound of spectral range (nm)')
-    parser.add_argument("--lambda_max", type=int, default=1700, help='upper bound of spectral range (nm)')
+    parser.add_argument("--spectral_res", type=float, default=1.5
+                        , help='spectral resolution (nm) between 0.5nm and 8.5nm')
+    parser.add_argument("--lambda_min", type=int, default=1590, help='lower bound of spectral range (nm)')
+    parser.add_argument("--lambda_max", type=int, default=1680, help='upper bound of spectral range (nm)')
     parser.add_argument("--season", type=str, default='winter', help='season list: winter, spring, summer, fall')
     parser.add_argument("--carbon_dioxide", type=float, default=419.05, help='Carbon Dioxide (ppmv)')
     parser.add_argument("--carbon_monoxide", type=float, default=0.1575, help='Carbon Monoxide (ppmv)')
@@ -62,7 +63,7 @@ def parse_config():
     parser.add_argument("--altitude", type=float, default=499.71, help='Height of the sensor above Earth ground level')
     parser.add_argument("--spectral_units", type=str, default="microns", help='Units: wavenumbers, microns')
     parser.add_argument("--plots_save", type=bool, default=False, help='set to True if you want radiance/transmittance plots from MODTRAN')
-    parser.add_argument("--headless", type=bool, default=True, help='set to False if you want to see the MODTRAN window as values are being inputted')
+    parser.add_argument("--headless", type=bool, default=False, help='set to False if you want to see the MODTRAN window as values are being inputted')
 
     return parser.parse_args()
 

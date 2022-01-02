@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 import matplotlib.pyplot as plt
 from print_config import print_config
+import numpy as np
 
 if __name__ == "__main__":
     '''
@@ -35,4 +36,7 @@ if __name__ == "__main__":
 
     if cfg.print_config:
         print_config(cfg, path=save_path, time=now)
+
+    csv_output = np.column_stack((spectral_series[:-1], snr))
+    np.savetxt('./snr_results/snr_csvs/snr_(%s).csv' % now, csv_output, delimiter=',')
 

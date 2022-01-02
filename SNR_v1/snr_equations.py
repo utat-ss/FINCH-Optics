@@ -63,6 +63,9 @@ def signal_to_noise():
     dark_noise = dark_current * cfg.t_int
     total_noise = np.sqrt(signal_target + signal_background + quant_noise**2 + dark_noise + cfg.readout_noise**2)
 
+    lea_noise = lea_pn(cfg, signal_target)
+    print("Signal: ", signal_target)
+
     ### Signal to Noise Ratio Calculation
     print("Calculating Signal to Noise Ratio...")
     if not cfg.decibels:
@@ -134,6 +137,11 @@ def efficiency_curves(type, unit, spec_res_series, cfg):
                 transmittance = np.asarray(transmittance)
                 return transmittance
 
-
+def lea_pn(cfg, signal_target):
+    spectral_res_series = np.arange(cfg.lambda_min, cfg.lambda_max, cfg.spectral_res)
+    photon_noise = interp1d(np.arange(signal_target.size),signal_target)
+    lea_pn = photon_noise(np.linspace(0,signal_target.size-1,spectral_res_series.size))
+    lea_pn = np.sqrt(lea_pn)
+    return lea_pn
 
 

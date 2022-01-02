@@ -102,6 +102,9 @@ class BrokeTran:
     def control(self, mode):
         self.driver.get('http://modtran.spectral.com/modtran_home')
 
+        time.sleep(5)
+        self.driver.refresh()
+
         time.sleep(2)
         if mode == "transmittance":
             btn_mode = self.driver.find_element_by_xpath('//*[@id="inputs_table"]/tbody/tr[1]/td[2]/input[1]')
@@ -210,7 +213,7 @@ class BrokeTran:
         move = ActionChains(self.driver)
         # offset = 0.1 * round(float(range_lower)/0.1)
         # offset = round((offset - 0.2)/0.1)
-        if self.range_lower == "1.6":
+        if self.range_lower == "1.59":
             move.click_and_hold(SR1_slider).move_by_offset(21, 0).release().perform()
         elif self.range_lower == "0.9":
             move.click_and_hold(SR1_slider).move_by_offset(8, 0).release().perform()
@@ -219,7 +222,7 @@ class BrokeTran:
         if mode == "radiance":
             res_slider = self.driver.find_element_by_xpath('//*[@id="resolution_slider"]/span')
             move = ActionChains(self.driver)
-            if self.range_lower == "1.6":
+            if self.range_lower == "1.59":
                 offset = round(124 - ((0.0085 - float(self.spectral_res)) / (0.0085 - 0.0005) * (124 - (-204))))
             elif self.range_lower == "0.9":
                 offset = round(115 - ((0.0087 - float(self.spectral_res)) / (0.0087 - 0.00151) * (115 - (-190))))
@@ -230,7 +233,7 @@ class BrokeTran:
         elif mode == "transmittance":
             res_slider = self.driver.find_element_by_xpath('//*[@id="resolution_slider"]/span')
             move = ActionChains(self.driver)
-            if self.range_lower == "1.6":
+            if self.range_lower == "1.59":
                 offset = round(225 - ((0.0085 - float(self.spectral_res)) / (0.0085 - 0.0005) * (225 - (-102))))
             elif self.range_lower == "0.9":
                 offset = round(225 - ((0.0085 - float(self.spectral_res)) / (0.0085 - 0.0005) * (225 - (-101))))
