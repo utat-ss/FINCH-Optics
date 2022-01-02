@@ -11,6 +11,7 @@ from config import parse_config
 from scipy.integrate import cumtrapz
 from scipy.interpolate import interp1d
 from background_reflectance import background_reflectance
+from datetime import datetime
 
 def signal_to_noise():
 
@@ -33,6 +34,16 @@ def signal_to_noise():
 
     for i in range(0, len(spec_res_series)):
         spec_res_series[i] = spec_res_series[i] / (1e6)
+
+    now = str(datetime.now())[:-7]
+    now = now.replace(" ", "_")
+    now = now.replace(":", "")
+
+    radiance_output = np.column_stack((spec_res_series, L_radiance))
+    np.savetxt('./snr_results/snr_csvs/L_radiance_(%s).csv' % now, radiance_output, delimiter=',')
+
+    transmittance_output = np.column_stack((spec_res_series, L_transmittance))
+    np.savetxt('./snr_results/snr_csvs/L_transmittance_(%s).csv' % now, transmittance_output, delimiter=',')
 
 
 
@@ -133,7 +144,3 @@ def efficiency_curves(type, unit, spec_res_series, cfg):
                     transmittance.append(cfg.filter_transmittance)
                 transmittance = np.asarray(transmittance)
                 return transmittance
-
-
-
-
