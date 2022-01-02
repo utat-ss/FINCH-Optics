@@ -102,6 +102,9 @@ class BrokeTran:
     def control(self, mode):
         self.driver.get('http://modtran.spectral.com/modtran_home')
 
+        time.sleep(5)
+        self.driver.refresh()
+
         time.sleep(2)
         if mode == "transmittance":
             btn_mode = self.driver.find_element_by_xpath('//*[@id="inputs_table"]/tbody/tr[1]/td[2]/input[1]')

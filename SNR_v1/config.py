@@ -62,7 +62,7 @@ def parse_config():
     parser.add_argument("--altitude", type=float, default=499.71, help='Height of the sensor above Earth ground level')
     parser.add_argument("--spectral_units", type=str, default="microns", help='Units: wavenumbers, microns')
     parser.add_argument("--plots_save", type=bool, default=False, help='set to True if you want radiance/transmittance plots from MODTRAN')
-    parser.add_argument("--headless", type=bool, default=True, help='set to False if you want to see the MODTRAN window as values are being inputted')
+    parser.add_argument("--headless", type=bool, default=False, help='set to False if you want to see the MODTRAN window as values are being inputted')
 
     return parser.parse_args()
 
